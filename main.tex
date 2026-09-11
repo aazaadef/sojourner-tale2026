@@ -19,6 +19,9 @@
 \usepackage{balance}
 
 \begin{document}
+% EDAS rejects manuscripts carrying page numbers, headers or footers. The
+% conference class already omits them; this makes that explicit.
+\pagestyle{empty}
 
 \title{Teaching Software Testing and Debugging Through a Serious Game: An Empirical Classroom Study with Sojourner under Sabotage}
 
@@ -31,6 +34,7 @@
 }
 
 \maketitle
+\thispagestyle{empty}
 
 \begin{abstract}
 Software testing and debugging matter in software engineering, but students often find them boring and struggle to turn theory into practice. To make the experience more concrete we ran a classroom study with \emph{Sojourner under Sabotage}, a browser-based serious game in which students write JUnit tests, build line coverage, spot mutations and debug sabotaged spaceship components across seven increasingly hard levels. We evaluated a single combined session---an introductory lecture followed by guided gameplay---with 22 master's students, collecting pre- and post-session quizzes, confidence ratings, perception surveys, open-ended feedback and in-game telemetry: 3,161 events across 14 event types. Students' confidence in analyzing test failures increased ($+0.38$; 7~improved, 0~declined), 95\% agreed the session improved their understanding of testing versus debugging, and 86\% agreed that the activity was engaging. Knowledge gains were positive but not statistically significant (exact Wilcoxon $p = 0.117$), which a high pre-test baseline largely explains. Telemetry showed that students who progressed further also tended to improve more on the quiz (Spearman $\rho = 0.53$, permutation $p = 0.016$, 95\%~CI $[0.12, 0.78]$). Because the lecture and the game were delivered together and no control group was used, these findings are exploratory: they describe associations rather than establishing that the game itself caused the observed gains.
