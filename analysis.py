@@ -385,6 +385,10 @@ for cname, items in CONSTRUCTS.items():
 try:
     import matplotlib
     matplotlib.use("Agg")
+    # matplotlib defaults to Type 3 fonts in PDF output, which IEEE PDF eXpress
+    # rejects. 42 emits TrueType instead.
+    matplotlib.rcParams["pdf.fonttype"] = 42
+    matplotlib.rcParams["ps.fonttype"] = 42
     import matplotlib.pyplot as plt
     import numpy as np
 
