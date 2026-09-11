@@ -1,11 +1,12 @@
 \documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
-% TODO before camera-ready: replace XXXXXXXXXXXXX with the ISBN EDAS shows for
-% this paper. Portuguese university authors use the plain "IEEE" variant below;
-% the Crown, European Union and U.S. Government variants do not apply.
-\IEEEpubid{\makebox[\columnwidth]{%
-  XXXXXXXXXXXXX/26/\$31.00~\copyright~2026 IEEE\hfill}%
-  \hspace{\columnsep}\makebox[\columnwidth]{}}
+% The TALE 2026 camera-ready instructions do not ask for a first-page copyright
+% block; their only copyright requirement covers self-archiving. If the
+% publication chair or PDF eXpress asks for one, uncomment these lines and the
+% \IEEEpubidadjcol in Section I, and fill in the proceedings ISBN.
+% \IEEEoverridecommandlockouts
+% \IEEEpubid{\makebox[\columnwidth]{%
+%   <ISBN>/26/\$31.00~\copyright~2026 IEEE\hfill}%
+%   \hspace{\columnsep}\makebox[\columnwidth]{}}
 \usepackage{cite}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
@@ -48,7 +49,7 @@ In software engineering, testing and debugging skills are crucial, but students 
 \emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} is a browser-based serious game in which players detect and repair sabotaged spaceship systems by writing JUnit tests, achieving line coverage, and debugging mutated code across seven progressively complex levels. An initial evaluation with 79~students showed over 80\% improvement in test coverage and debugging skills~\cite{straubinger2025sojourner}.
 This paper extends that work with an independent evaluation in a different institutional context: a self-hosted instance for 22 master's students at a Portuguese university, combining pre/post knowledge assessments, self-confidence measures, perception questionnaires, open-ended feedback and fine-grained behavioral telemetry (3,161 events across 14 types). That lets us ask not only \emph{whether} scores and attitudes shift over the session, but also \emph{how} students engage with the tasks during gameplay.
 
-\IEEEpubidadjcol
+% \IEEEpubidadjcol  % re-enable only together with the \IEEEpubid block above
 Three questions guide the study. \textbf{RQ1}: to what extent do students' conceptual understanding and self-assessed confidence change over the session? \textbf{RQ2}: how do they perceive the game in terms of engagement, perceived learning, usability and cognitive load? \textbf{RQ3}: what behavioral patterns emerge from the telemetry, and how do they relate to learning outcomes? RQ1 and RQ2 are the primary evaluation; RQ3 adds a second, independent view of the same session, though triangulation does not by itself validate the self-reports.
 The contribution is an independent evaluation outside the group that built the game and---absent from earlier evaluations---a telemetry-based account of how students actually behaved during play.
 
