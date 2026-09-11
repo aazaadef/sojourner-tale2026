@@ -45,25 +45,18 @@ This paper extends that work through an independent empirical evaluation in a di
 We deployed a self-hosted instance for 22 master's students at a Portuguese university, and collected a rich dataset combining pre/post knowledge assessments, self-confidence measures, perception questionnaires, open-ended feedback, and fine-grained in-game behavioral telemetry (3,161 recorded events across 14 types).
 This triangulated design lets us examine not only \emph{whether} scores and attitudes shift over the session, but also \emph{how} students engage with the testing and debugging tasks during gameplay.
 
-The study is guided by three research questions:
-\begin{description}
-    \item[RQ1] To what extent do students' conceptual understanding and self-assessed confidence in software testing and debugging change over the session?
-    \item[RQ2] How do students perceive the game in terms of engagement, perceived learning, usability, and cognitive load?
-    \item[RQ3] What behavioral patterns emerge from the game's telemetry, and how do they relate to learning outcomes?
-\end{description}
-While RQ1 and RQ2 constitute the primary evaluation, RQ3 provides behavioral evidence that complements the self-reported findings; triangulation of this kind adds a second, independent view of the same session, but it does not by itself validate the self-reports.
-
-This paper contributes an independent evaluation of the game outside the group that built it; a triangulated design combining knowledge tests, confidence scales, perception questionnaires and open-ended feedback; and---absent from earlier evaluations---a telemetry-based account of how students actually behaved during play.
+Three questions guide the study. \textbf{RQ1}: to what extent do students' conceptual understanding and self-assessed confidence change over the session? \textbf{RQ2}: how do they perceive the game in terms of engagement, perceived learning, usability and cognitive load? \textbf{RQ3}: what behavioral patterns emerge from the telemetry, and how do they relate to learning outcomes? RQ1 and RQ2 are the primary evaluation; RQ3 adds a second, independent view of the same session, though triangulation does not by itself validate the self-reports.
+This paper contributes an independent evaluation of the game outside the group that built it, a triangulated design combining knowledge tests, confidence scales, perception questionnaires and open-ended feedback, and---absent from earlier evaluations---a telemetry-based account of how students actually behaved during play.
 
 % ===========================================================================
 \section{Background and Related Work}
 \label{sec:background}
 % ===========================================================================
 
-Software testing is often taught inside general programming courses and is widely perceived as tedious~\cite{garousi2020testing, straubinger2023survey}; debugging receives even less instructional focus, and novices struggle with misconceptions about program behavior~\cite{mccauley2008debugging, li2019framework}. This has motivated strategies grounded in experiential and problem-based learning~\cite{kolb1984experiential, hmelo2004problem}.
+Software testing is often taught inside general programming courses and is widely perceived as tedious~\cite{garousi2020testing, straubinger2023survey}; debugging receives even less instructional focus, and novices struggle with misconceptions about program behavior~\cite{mccauley2008debugging}. This has motivated strategies grounded in experiential and problem-based learning~\cite{kolb1984experiential, hmelo2004problem}.
 
-Gamification---game elements in non-game contexts~\cite{deterding2011gamification}---has shown promise in testing education~\cite{blanco2023gamification}, though poor design can cause frustration~\cite{toda2017dark}, and serious games offer immersive, goal-driven experiences~\cite{connolly2012systematic}.
-Several target testing: the Testing Game~\cite{valle2017testing} teaches strategies but lacks hands-on test writing; Code Defenders~\cite{fraser2019code, clegg2017teaching} engages students with JUnit and mutations but has usability concerns; Code Critters~\cite{straubinger2023code} targets younger learners. For debugging, Gidget~\cite{lee2014gidget} and RoboBUG~\cite{miljanovic2017robobug} guide students through structured tasks.
+Gamification has shown promise in testing education~\cite{blanco2023gamification}, though poor design can cause frustration~\cite{toda2017dark}, and serious games offer immersive, goal-driven experiences~\cite{connolly2012systematic}.
+Several target testing: the Testing Game~\cite{valle2017testing} teaches strategies but lacks hands-on test writing; Code Defenders~\cite{fraser2019code} engages students with JUnit and mutations but has usability concerns; Code Critters~\cite{straubinger2023code} targets younger learners.
 
 \emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} combines real JUnit testing with narrative gameplay across seven levels, and by exercising fault localization, mutation detection and iterative refinement it pushes students past the verification-oriented habit of confirming expected outputs.
 Unlike the previous evaluations, which were conducted by the game's developers, ours is an \emph{independent replication} in a different institutional and cultural context, with telemetry-based behavioral analysis added.
@@ -94,9 +87,7 @@ Each student's game username matched their questionnaire participant code, which
 \subsection{Deployment and Monitoring Infrastructure}
 
 We deployed the instance on the university's internal server, reachable by all enrolled students over the institutional network, and generated anonymous accounts in bulk through the game's administrative interface.
-For post-session analysis we built a small web dashboard that consumes the game's JSON telemetry export and renders per-student timelines, progression summaries and raw events, so instructors can inspect a student's testing and debugging actions without reading raw JSON; its source is in the replication package.
-Server-level monitoring during the session came from \emph{JavaMelody}~\cite{javamelody}, which the game's admin interface integrates.
-Together these make a practical, replicable setup for running a serious game at classroom scale with learning-analytics support.
+For post-session analysis we built a small web dashboard that consumes the game's JSON telemetry export and renders per-student timelines, progression summaries and raw events, so instructors can inspect a student's testing and debugging actions without reading raw JSON; its source is in the replication package. Together with the game's built-in server monitoring, this makes a practical, replicable setup for running a serious game at classroom scale with learning-analytics support.
 
 \subsection{Session Structure}
 The session lasted approximately 2 hours, of which 50 minutes were an introductory lecture on software testing concepts, and the next approximately 60 minutes were devoted to guided gameplay, with 10 minutes allocated to completing pre- and post-activity questionnaires.
@@ -135,47 +126,14 @@ Per-item accuracy improved most on concepts directly practiced in the session: t
 
 \subsubsection{Self-Confidence}
 
-All four self-confidence items improved (Table~\ref{tab:confidence}), with the largest gain in ``analyzing test failures'' ($+0.38$, 7~improved, 0~declined).
+All four self-confidence items improved on the 5-point scale: understanding concepts 3.43~$\rightarrow$~3.57, writing a test case 3.48~$\rightarrow$~3.71, identifying and debugging errors 3.48~$\rightarrow$~3.67, and analyzing test failures 3.24~$\rightarrow$~3.62. The last is the largest gain ($+0.38$) and the only item no student rated lower afterwards (7~improved, 14~unchanged, 0~declined).
 Internal consistency was good (Cronbach $\alpha_{pre} = 0.814$, $\alpha_{post} = 0.848$).
-
-\begin{table}[htbp]
-\caption{Self-Confidence Shift ($N = 21$)}
-\label{tab:confidence}
-\centering
-\small
-\begin{tabular}{lcccc}
-\toprule
-Item & Pre & Post & $\Delta$ & $\uparrow/\!=\!/\!\downarrow$ \\
-\midrule
-Understand concepts & 3.43 & 3.57 & +0.14 & 3/16/2 \\
-Write test case & 3.48 & 3.71 & +0.24 & 5/15/1 \\
-Identify/debug errors & 3.48 & 3.67 & +0.19 & 4/15/2 \\
-Analyze test failures & 3.24 & 3.62 & +0.38 & 7/14/0 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{RQ2: Student Perception}
 
-Table~\ref{tab:perception} summarizes post-session perception.
-Students rated the session highly on all three reliable constructs. At the level of individual items, 95\% agreed it helped them understand testing vs.\ debugging, 86\% agreed the activity was engaging, and 71\% preferred it over traditional lectures; these single-item figures are higher than the corresponding construct averages, which aggregate three or four items each.
+Students rated the session highly on all three reliable constructs: perceived learning 4.06 (86\% agree, $\alpha = 0.87$), engagement 4.05 (76\%, $\alpha = 0.75$) and usability 4.24 (75\%, $\alpha = 0.98$).
+At the level of individual items, 95\% agreed it helped them understand testing vs.\ debugging, 86\% agreed the activity was engaging, and 71\% preferred it over traditional lectures; these single-item figures are higher than the construct averages, which aggregate three or four items each.
 The three cognitive-load items did not form a reliable scale ($\alpha = -0.57$), so we report them individually rather than as a composite: mental effort 3.19, parts of the activity confusing 2.86, and difficulty level appropriate 3.86 (71\% agreement).
-
-\begin{table}[htbp]
-\caption{Post-Session Perception ($N = 21$)}
-\label{tab:perception}
-\centering
-\small
-\begin{tabular}{lccc}
-\toprule
-Construct (items) & Mean & \% Agree & $\alpha$ \\
-\midrule
-Perceived Learning (4) & 4.06 & 86\% & 0.87 \\
-Engagement (3) & 4.05 & 76\% & 0.75 \\
-Usability (3) & 4.24 & 75\% & 0.98 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 The open-ended responses were grouped by recurring topic by one author. This was not a formal thematic analysis with independent coders and inter-rater agreement, so we report the groupings as descriptive impressions rather than validated themes, with counts out of the 21 respondents.
 Asked what helped them learn most, 8 students named the game or its interactivity (e.g.\ \emph{``The code changing in real time demanding debugging,''} \emph{``The gamification''}), and 3 explicitly credited the preceding lecture, the slides, or the instructor---a reminder that the two components cannot be separated here.
@@ -261,27 +219,21 @@ With the two components delivered together, no control group and a small cohort,
 The replication package---the full MCQ and questionnaire instruments, pseudonymized participant-level data, the telemetry export, and the analysis script that produces every number reported here---is available at \url{https://github.com/aazaadef/sojourner-tale2026}.
 
 \section*{Acknowledgment}
-This work was supported by FCT -- Funda\c{c}\~{a}o para a Ci\^{e}ncia e Tecnologia, I.P.\ by project reference UIDB/50008/2020 (DOI: \url{https://doi.org/10.54499/UIDB/50008/2020}) and by the doctoral grant PRT/BD/155023/2023.
-The authors used generative AI tools solely to support English language polishing and readability improvements. All technical content, interpretations, and conclusions were created and verified by the authors, who take full responsibility for the final manuscript.
+This work was supported by FCT -- Funda\c{c}\~{a}o para a Ci\^{e}ncia e Tecnologia, I.P., project reference UIDB/50008/2020 (DOI: 10.54499/UIDB/50008/2020) and doctoral grant PRT/BD/155023/2023.
+Generative AI tools were used solely for English language polishing. All technical content, interpretations and conclusions were created and verified by the authors, who take full responsibility for the manuscript.
 
 \balance
 \bibliographystyle{IEEEtran}
 \begin{thebibliography}{99}
 \bibitem{straubinger2025sojourner} P.~Straubinger, T.~Greller, and G.~Fraser, ``Sojourner under Sabotage: A Serious Testing and Debugging Game,'' in \emph{Proc.\ FSE Companion '25}, ACM, 2025.
-\bibitem{javamelody} JavaMelody, ``Open-source monitoring for Java applications,'' 2024. Available: https://github.com/javamelody/javamelody
 \bibitem{garousi2020testing} V.~Garousi, A.~Rainer, P.~Lauv\aa{}s~Jr., and A.~Arcuri, ``Software-testing education: A systematic literature mapping,'' \emph{J.\ Syst.\ Softw.}, vol.~165, 2020.
 \bibitem{straubinger2023survey} P.~Straubinger and G.~Fraser, ``A Survey on What Developers Think About Testing,'' in \emph{Proc.\ ISSRE '23}, IEEE, 2023, pp.~80--90.
 \bibitem{mccauley2008debugging} R.~McCauley et~al., ``Debugging: a review of the literature from an educational perspective,'' \emph{Comput.\ Sci.\ Educ.}, vol.~18, no.~2, pp.~67--92, 2008.
-\bibitem{deterding2011gamification} S.~Deterding et~al., ``From game design elements to gamefulness: defining `gamification,'\,'' in \emph{Proc.\ MindTrek '11}, ACM, 2011, pp.~9--15.
 \bibitem{blanco2023gamification} R.~Blanco et~al., ``Can gamification help in software testing education?'' \emph{J.\ Syst.\ Softw.}, vol.~200, 2023.
 \bibitem{connolly2012systematic} T.~M.~Connolly et~al., ``A systematic literature review of empirical evidence on computer games and serious games,'' \emph{Comput.\ Educ.}, vol.~59, no.~2, pp.~661--686, 2012.
 \bibitem{fraser2019code} G.~Fraser et~al., ``Gamifying a Software Testing Course with Code Defenders,'' in \emph{Proc.\ SIGCSE '19}, ACM, 2019, pp.~571--577.
-\bibitem{clegg2017teaching} B.~S.~Clegg, J.~M.~Rojas, and G.~Fraser, ``Teaching Software Testing Concepts Using a Mutation Testing Game,'' in \emph{Proc.\ ICSE-SEET '17}, IEEE, 2017, pp.~33--36.
 \bibitem{valle2017testing} P.~H.~D.~Valle et~al., ``The Testing Game,'' in \emph{Proc.\ SBES '17}, 2017.
 \bibitem{straubinger2023code} P.~Straubinger, L.~Caspari, and G.~Fraser, ``Code Critters: A Block-Based Testing Game,'' in \emph{Proc.\ ICST '23 Workshops}, IEEE, 2023, pp.~426--429.
-\bibitem{lee2014gidget} M.~J.~Lee, ``Gidget: An online debugging game,'' in \emph{Proc.\ VL/HCC '14}, IEEE, 2014, pp.~193--194.
-\bibitem{miljanovic2017robobug} M.~A.~Miljanovic and J.~S.~Bradbury, ``RoboBUG: A Serious Game for Learning Debugging,'' in \emph{Proc.\ ICER '17}, ACM, 2017, pp.~93--100.
-\bibitem{li2019framework} C.~Li et~al., ``Towards a Framework for Teaching Debugging,'' in \emph{Proc.\ ACE '19}, ACM, 2019, pp.~79--86.
 \bibitem{toda2017dark} A.~M.~Toda et~al., ``The Dark Side of Gamification,'' in \emph{HEFA '17}, Springer, 2017, pp.~143--156.
 \bibitem{kolb1984experiential} D.~A.~Kolb, \emph{Experiential Learning: Experience as the Source of Learning and Development}. Prentice-Hall, 1984.
 \bibitem{hmelo2004problem} C.~E.~Hmelo-Silver, ``Problem-Based Learning: What and How Do Students Learn?'' \emph{Educ.\ Psychol.\ Rev.}, vol.~16, no.~3, pp.~235--266, 2004.
