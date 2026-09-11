@@ -37,7 +37,7 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-Software testing and debugging matter in software engineering, but students often find them boring and struggle to turn theory into practice. To make the experience more concrete we ran a classroom study with \emph{Sojourner under Sabotage}, a browser-based serious game in which students write JUnit tests, build line coverage, spot mutations and debug sabotaged spaceship components across seven increasingly hard levels. We evaluated a single combined session---an introductory lecture followed by guided gameplay---with 22 master's students, collecting pre- and post-session quizzes, confidence ratings, perception surveys, open-ended feedback and in-game telemetry: 3,161 events across 14 event types. Students' confidence in analyzing test failures increased ($+0.38$; 7~improved, 0~declined), 95\% agreed the session improved their understanding of testing versus debugging, and 86\% agreed that the activity was engaging. Knowledge gains were positive but not statistically significant (exact Wilcoxon $p = 0.117$), which a high pre-test baseline largely explains. Telemetry showed that students who progressed further also tended to improve more on the quiz (Spearman $\rho = 0.53$, permutation $p = 0.016$, 95\%~CI $[0.12, 0.78]$). Because the lecture and the game were delivered together and no control group was used, these findings are exploratory: they describe associations rather than establishing that the game itself caused the observed gains.
+Software testing and debugging matter in software engineering, but students often find them boring and struggle to turn theory into practice. To make the experience more concrete we ran a classroom study with \emph{Sojourner under Sabotage}, a browser-based serious game in which students write JUnit tests, build line coverage, spot mutations and debug sabotaged spaceship components across seven increasingly hard levels. We evaluated a single combined session---an introductory lecture followed by guided gameplay---with 22 master's students, collecting pre- and post-session quizzes, confidence ratings, perception surveys, open-ended feedback and in-game telemetry: 3,161 events across 14 event types. Students' confidence in analyzing test failures increased ($+0.38$; 7~improved, 0~declined), 95\% agreed the session improved their understanding of testing versus debugging, and 86\% agreed that the activity was engaging. Knowledge gains were positive but not statistically significant (exact Wilcoxon $p = 0.117$), which a high pre-test baseline largely explains. Telemetry showed that students who progressed further also tended to improve more on the quiz (Spearman $\rho = 0.53$, permutation $p = 0.015$, 95\%~CI $[0.12, 0.78]$). Because the lecture and the game were delivered together and no control group was used, these findings are exploratory: they describe associations rather than establishing that the game itself caused the observed gains.
 
 \end{abstract}
 
@@ -154,7 +154,7 @@ Three students answered in Portuguese; their quotations are translated by the au
 
 \subsection{RQ3: Behavioral Engagement (Telemetry)}
 
-The game recorded 3,161~events from 22~active players across 14 event types (Table~\ref{tab:telemetry}); students with questionnaire matches averaged 46~minutes of active gameplay.
+The game recorded 3,161~events from 22~active players across 14 event types (Table~\ref{tab:telemetry}). For the 21 students with questionnaire matches, a median of 40~minutes separated their first and last logged event, or 32~minutes once gaps longer than five minutes are excluded as idle time.
 Navigation and dialogue account for most of the volume, while the events that reflect testing work---editing, running and activating tests, detecting mutations and repairing components---are the smaller counts.
 
 \begin{table}[htbp]
@@ -181,13 +181,13 @@ Progression fell off steadily: all 22 students started Room~1 (CryoSleep), 12 (5
 
 The 56~\emph{ComponentDestroyedEvent}s indicate cases where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
 This shows the adaptive support mechanism was triggered in practice; the event counts alone say nothing about whether that support improved learning, and both counts are concentrated in a subset of students rather than spread evenly.
-An exploratory correlation analysis ($N = 21$ students with matched telemetry and questionnaire data) found a positive association between game progression and MCQ gains (Spearman $\rho = 0.53$, permutation $p = 0.016$, 95\%~CI $[0.12, 0.78]$; Fig.~\ref{fig:correlation}).
+An exploratory correlation analysis ($N = 21$ students with matched telemetry and questionnaire data) found a positive association between game progression and MCQ gains (Spearman $\rho = 0.53$, permutation $p = 0.015$, 95\%~CI $[0.12, 0.78]$; Fig.~\ref{fig:correlation}).
 Progression was also strongly correlated with test executions ($\rho = 0.91$, $p < 0.001$, CI $[0.79, 0.96]$), although advancement in this game structurally \emph{requires} executing tests, so this association is partly a property of the design rather than an independent finding.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig_correlation.pdf}
-\caption{(a) Game progression vs.\ MCQ gains ($\rho = 0.53$, $p = 0.016$). (b) Progression vs.\ test executions ($\rho = 0.91$, $p < 0.001$).}
+\caption{(a) Game progression vs.\ MCQ gains ($\rho = 0.53$, $p = 0.015$). (b) Progression vs.\ test executions ($\rho = 0.91$, $p < 0.001$).}
 \label{fig:correlation}
 \end{figure}
 
@@ -205,7 +205,7 @@ The open-ended answers point the same way: students valued the immediate feedbac
 
 \subsection{Practical Implications}
 
-For instructors considering the game: allow at least 70~minutes of play, since shorter sessions leave students in the tutorial level; generate accounts in bulk with participant codes matching questionnaire IDs so the data streams link; budget guidance for the first level, because orientation rather than syntax was what students most often found hard at the start; and consider a lightweight dashboard over the JSON export, which makes engagement patterns and high compilation-failure rates visible in time to act on them.
+For instructors considering the game: allow at least 70~minutes of play, since shorter sessions leave students in the tutorial level; generate accounts in bulk with participant codes matching questionnaire IDs so the data streams link; and budget guidance for the first level, because orientation rather than syntax was what students most often found hard at the start.
 
 % ===========================================================================
 \section{Threats to Validity}
@@ -214,7 +214,7 @@ For instructors considering the game: allow at least 70~minutes of play, since s
 
 \textbf{Internal.} The single-group pre/post design without a control group rules out causal interpretation, and because the lecture and the gameplay were delivered in one session, no result here can be attributed to the game alone. Reusing identical MCQ items may add a testing effect, and the ceiling in the instrument limits the observable range.
 
-\textbf{Construct.} The 11-item MCQ was written by the authors for this session and mapped to the concepts the game exercises, but it was neither externally validated nor piloted for difficulty; it is in the replication package so others can assess it. The cognitive-load items mix valence and did not form a reliable scale ($\alpha = -0.57$), so we report them individually. Usability's $\alpha = 0.98$ suggests its three items are close to redundant. Perceived learning is self-report, not demonstrated learning.
+\textbf{Construct.} The 11-item MCQ was written by the authors for this session and mapped to the concepts the game exercises, but it was neither externally validated nor piloted for difficulty; it is in the replication package so others can assess it. We report no internal-consistency coefficient for it, because its items deliberately span distinct concepts rather than one latent trait, and a coefficient like KR-20 would penalise that breadth rather than measure the instrument's adequacy. The cognitive-load items mix valence and did not form a reliable scale ($\alpha = -0.57$), so we report them individually. Usability's $\alpha = 0.98$ suggests its three items are close to redundant. Perceived learning is self-report, not demonstrated learning.
 
 \textbf{External and reliability.} A single intact class at one institution fixed the sample rather than letting us choose it; with $N = 21$ matched pairs the study is underpowered for anything but a large effect, and every inferential result should be read as exploratory. Cronbach's $\alpha$ for self-confidence ($\geq 0.81$), perceived learning ($0.87$) and engagement ($0.75$) is acceptable to good.
 

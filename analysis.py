@@ -329,6 +329,22 @@ rho1, p1 = s1["rho"], s1["p_perm"]
 rho2, p2 = s2["rho"], s2["p_perm"]
 
 print(f"N (pre+post+tele matched): {len(tele_matched)}")
+
+# Time on task, reported two ways because "active gameplay" needs a definition:
+# the whole span from a student's first to last event, and that span minus any
+# gap longer than five minutes (treated as the student being idle).
+IDLE_MS = 5 * 60 * 1000
+spans, active = [], []
+for code in tele_matched:
+    ts = sorted(e["timestamp"] for e in user_events[code])
+    if len(ts) < 2:
+        continue
+    spans.append((ts[-1] - ts[0]) / 60000.0)
+    active.append(sum(min(b - a, IDLE_MS) for a, b in zip(ts, ts[1:])) / 60000.0)
+d_span, d_act = describe(spans), describe(active)
+print(f"Time on task (n={len(spans)}):")
+print(f"  first-to-last span     mean={d_span['mean']:.1f} min  median={d_span['median']:.1f}")
+print(f"  excluding >5 min gaps  mean={d_act['mean']:.1f} min  median={d_act['median']:.1f}")
 for label, s in [("progression vs MCQ gain", s1), ("progression vs test executions", s2)]:
     print(f"\nSpearman: {label}  (n={s['n']})")
     print(f"  rho (tie-corrected)      = {s['rho']:.3f}")
