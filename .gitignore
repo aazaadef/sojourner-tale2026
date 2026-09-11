@@ -1,0 +1,12 @@
+# Never publish the raw export: it contains names and password hashes.
+results/
+data.json
+*.orig
+__pycache__/
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
