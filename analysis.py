@@ -296,9 +296,15 @@ print("=" * 60)
 # The published telemetry export is already pseudonymized: every account appears
 # as its questionnaire participant code, accounts that registered under a real
 # name were rewritten to their code, and instructor, admin and test accounts were
-# removed along with all name and credential fields. Nothing is left to resolve.
+# removed along with all name and credential fields.
+#
+# ANON01 is the one account that played but never matched a questionnaire code,
+# so it is not one of the 22 students and is excluded from every reported count.
+UNMATCHED = {"ANON01"}
+
 def resolve_user(username):
-    return username.upper()
+    u = username.upper()
+    return None if u in UNMATCHED else u
 
 tele = json.loads(TELE_JSON.read_text())
 
@@ -328,7 +334,33 @@ s2 = spearman(rooms, tests)
 rho1, p1 = s1["rho"], s1["p_perm"]
 rho2, p2 = s2["rho"], s2["p_perm"]
 
-print(f"N (pre+post+tele matched): {len(tele_matched)}")
+# Table I of the paper: how many of each event type, over the 22 students.
+EVENT_LABELS = {
+    "RoomUnlockedEvent": "Room unlocked",
+    "GameProgressionChangedEvent": "Game progression",
+    "ConversationFinishedEvent": "Conversation",
+    "test-modified": "Test modified",
+    "test-executed": "Test executed",
+    "test-execution-failed": "Test exec. failed",
+    "ComponentFixedEvent": "Component fixed",
+    "cut-modified": "CUT modified",
+    "MutatedComponentTestsFailedEvent": "Mutation detected",
+    "ComponentTestsActivatedEvent": "Tests activated",
+    "DebugStartEvent": "Debug started",
+    "ComponentDestroyedEvent": "Component destroyed",
+    "GameStartedEvent": "Game started",
+    "ComponentTestsExtendedEvent": "Hidden test added",
+}
+counts = defaultdict(int)
+for code, evs in user_events.items():
+    for e in evs:
+        counts[e["eventType"]] += 1
+print(f"Students with telemetry: {len(user_events)}")
+print(f"Total events: {sum(counts.values())} across {len(counts)} event types")
+for ty, c in sorted(counts.items(), key=lambda kv: -kv[1]):
+    print(f"  {EVENT_LABELS.get(ty, ty):22s} {c:5d}")
+
+print(f"\nN (pre+post+tele matched): {len(tele_matched)}")
 
 # Time on task, reported two ways because "active gameplay" needs a definition:
 # the whole span from a student's first to last event, and that span minus any
