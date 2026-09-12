@@ -52,7 +52,7 @@ Software testing, Debugging, Serious games, Computer science education, Educatio
 \label{sec:intro}
 % ===========================================================================
 In software engineering, testing and debugging skills are crucial, but students often find them boring and tedious compared to coding~\cite{straubinger2023survey, garousi2020testing}. Traditional lecture-based teaching has a hard time keeping their attention and leaves a large gap between theoretical understanding and real-world application~\cite{mccauley2008debugging}. Game-based teaching can recast testing tasks as narrative-driven gameplay with immediate, tangible feedback~\cite{connolly2012systematic, blanco2023gamification}.
-\emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} is a browser-based serious game in which players detect and repair sabotaged spaceship systems by writing JUnit tests, achieving line coverage, and debugging mutated code across seven progressively complex levels. An initial evaluation with 79~students showed over 80\% improvement in test coverage and debugging skills~\cite{straubinger2025sojourner}.
+\emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} is a browser-based serious game in which players repair sabotaged spaceship systems by writing JUnit tests and debugging mutated code across seven levels; an initial evaluation with 79~students showed over 80\% improvement in test coverage and debugging skills.
 This paper extends that work with an independent evaluation in a different institutional context: a self-hosted instance for 22 master's students at a Portuguese university, combining pre/post knowledge assessments, self-confidence measures, perception questionnaires, open-ended feedback and fine-grained behavioral telemetry (3,161 events across 14 types). That lets us ask not only \emph{whether} scores and attitudes shift over the session, but also \emph{how} students engage with the tasks during gameplay.
 
 % \IEEEpubidadjcol  % re-enable only together with the \IEEEpubid block above
@@ -69,8 +69,7 @@ Software testing is often taught inside general programming courses and is widel
 Gamification has shown promise in testing education~\cite{blanco2023gamification}, though poor design can cause frustration~\cite{toda2017dark}, and serious games offer immersive, goal-driven experiences~\cite{connolly2012systematic}.
 Several target testing: the Testing Game~\cite{valle2017testing} teaches strategies but lacks hands-on test writing; Code Defenders~\cite{fraser2019code} engages students with JUnit and mutations but has usability concerns; Code Critters~\cite{straubinger2023code} targets younger learners.
 
-\emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} combines real JUnit testing with narrative gameplay across seven levels, and by exercising fault localization, mutation detection and iterative refinement it pushes students past the verification-oriented habit of confirming expected outputs.
-Unlike the previous evaluations, which were conducted by the game's developers, ours is an \emph{independent replication} in a different institutional and cultural context, with telemetry-based behavioral analysis added.
+By exercising fault localization, mutation detection and iterative refinement, \emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} pushes students past the verification-oriented habit of confirming expected outputs. Unlike the previous evaluations, which were conducted by the game's developers, ours is an \emph{independent replication} in a different institutional and cultural context, with telemetry-based behavioral analysis added.
 
 % ===========================================================================
 \section{Methodology}
@@ -106,7 +105,7 @@ The post-test therefore followed \emph{both} components. What we evaluate is the
 
 \subsection{Data Collection}
 
-The pre-activity questionnaire collected background information (field, experience levels, prior tool use), 11~MCQ items covering testing vs.\ debugging, unit/integration/black-box/white-box/mutation/functional testing and test case analysis, and four self-confidence Likert items (5-point scale). The post-activity questionnaire repeated the 11~MCQ and 4~self-confidence items and added perceived learning (4~items), engagement (3), usability (3), cognitive load (3) and four open-ended questions.
+The pre-activity questionnaire collected background information (field, experience levels, prior tool use), 11~multiple-choice question (MCQ) items covering testing vs.\ debugging, unit/integration/black-box/white-box/mutation/functional testing and test case analysis, and four self-confidence Likert items (5-point scale). The post-activity questionnaire repeated the 11~MCQ and 4~self-confidence items and added perceived learning (4~items), engagement (3), usability (3), cognitive load (3) and four open-ended questions.
 In parallel the backend logged 14~event types per player---room transitions and phase changes, edits to the test class and the class-under-test, test execution results with per-method pass/fail and line coverage, compilation errors, mutation detection outcomes, debugging actions, component fixes and destructions, and hidden test triggers---each timestamped and linked to the player's username.
 
 \subsection{Data Analysis}
@@ -154,11 +153,11 @@ Three students answered in Portuguese; their quotations are translated by the au
 
 \subsection{RQ3: Behavioral Engagement (Telemetry)}
 
-The game recorded 3,161~events from 22~active players across 14 event types (Table~\ref{tab:telemetry}). For the 21 students with questionnaire matches, a median of 40~minutes separated their first and last logged event, or 32~minutes once gaps longer than five minutes are excluded as idle time.
-Navigation and dialogue account for most of the volume, while the events that reflect testing work---editing, running and activating tests, detecting mutations and repairing components---are the smaller counts.
+The game recorded 3,161~events across 14 event types from the 22~students who played (Table~\ref{tab:telemetry}); the 21 who also completed both questionnaires form the matched set used below, and a further unmatched account's 15~events are excluded throughout.
+For those 21, a median of 40~minutes separated their first and last logged event, or 32~minutes once gaps longer than five minutes are excluded as idle time.
 
 \begin{table}[htbp]
-\caption{Telemetry event counts ($N = 22$ players, 3,161 events)}
+\caption{Telemetry event counts (22 students, 3,161 events)}
 \label{tab:telemetry}
 \centering
 \small
@@ -179,7 +178,7 @@ Component fixed    & 106   & Hidden test added   & 36 \\
 
 Progression fell off steadily: all 22 students started Room~1 (CryoSleep), 12 (55\%) reached Room~2, then 10, 9, 8 and 6 students reached Rooms~3--6 respectively, and 2 (9\%) completed all seven.
 
-The 56~\emph{ComponentDestroyedEvent}s indicate cases where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
+Fifty-six \emph{ComponentDestroyedEvent}s indicate cases where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
 This shows the adaptive support mechanism was triggered in practice; the event counts alone say nothing about whether that support improved learning, and both counts are concentrated in a subset of students rather than spread evenly.
 An exploratory correlation analysis ($N = 21$ students with matched telemetry and questionnaire data) found a positive association between game progression and MCQ gains (Spearman $\rho = 0.53$, permutation $p = 0.015$, 95\%~CI $[0.12, 0.78]$; Fig.~\ref{fig:correlation}).
 Progression was also strongly correlated with test executions ($\rho = 0.91$, $p < 0.001$, CI $[0.79, 0.96]$), although advancement in this game structurally \emph{requires} executing tests, so this association is partly a property of the design rather than an independent finding.
@@ -205,7 +204,7 @@ The open-ended answers point the same way: students valued the immediate feedbac
 
 \subsection{Practical Implications}
 
-For instructors considering the game: allow at least 70~minutes of play, since shorter sessions leave students in the tutorial level; generate accounts in bulk with participant codes matching questionnaire IDs so the data streams link; and budget guidance for the first level, because orientation rather than syntax was what students most often found hard at the start.
+For instructors considering the game: allow at least 70~minutes of play, since shorter sessions leave students in the tutorial level, and budget guidance for the first level, because orientation rather than syntax was what students most often found hard at the start.
 
 % ===========================================================================
 \section{Threats to Validity}
