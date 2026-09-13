@@ -23,8 +23,11 @@ pip install scipy numpy matplotlib
 python analysis.py
 ```
 
-The script reads only the files in this directory and prints every number
-reported in the paper, then regenerates the figures.
+The script reads only the files in this directory. It prints the participant
+background frequencies, the MCQ and self-confidence statistics, the telemetry
+event table, the progression funnel, time on task, both correlations and the
+perception constructs, then regenerates the figures. The groupings of the
+open-ended answers in Section IV-B were made by hand and are not computed here.
 
 ## Privacy
 
