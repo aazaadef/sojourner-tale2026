@@ -189,6 +189,25 @@ def describe(vals):
     return dict(mean=a.mean(), median=float(np.median(a)), q1=float(q1), q3=float(q3))
 
 # ---------------------------------------------------------------------------
+# Participant background (Section III.A)
+# ---------------------------------------------------------------------------
+_pre_rows = [r for r in list(csv.reader(open(PRE_CSV, encoding="utf-8")))[1:]
+             if any(c.strip() for c in r)]
+print("=" * 60)
+print("PARTICIPANT BACKGROUND")
+print("=" * 60)
+print(f"Respondents: {len(_pre_rows)}")
+for col, label, want in [(8,  "Computer Science / Software Engineering", ("Computer Science / Software Engineering/ Computer Engineering",)),
+                         (11, "programming experience: intermediate",    ("Intermediate",)),
+                         (14, "testing experience: basic",               ("Basic",)),
+                         (17, "debugging experience: basic",             ("Basic",)),
+                         (20, "has used testing tools before",           ("Yes, in coursework",
+                                                                          "Yes, in personal/academic projects",
+                                                                          "Yes, in professional/industry context"))]:
+    n = sum(1 for r in _pre_rows if r[col].strip() in want)
+    print(f"  {label:42s} {n:2d}/{len(_pre_rows)}")
+
+# ---------------------------------------------------------------------------
 # MCQ Analysis (Section IV.A / RQ1)
 # ---------------------------------------------------------------------------
 print("=" * 60)
@@ -359,6 +378,22 @@ print(f"Students with telemetry: {len(user_events)}")
 print(f"Total events: {sum(counts.values())} across {len(counts)} event types")
 for ty, c in sorted(counts.items(), key=lambda kv: -kv[1]):
     print(f"  {EVENT_LABELS.get(ty, ty):22s} {c:5d}")
+
+# Progression funnel (Section IV.C): a student "reached" room k if any
+# GameProgressionChangedEvent placed them in room k or beyond.
+print("\nProgression funnel (students reaching each room):")
+for room in range(1, 8):
+    n = sum(1 for c in user_events if user_max_room[c] >= room)
+    print(f"  Room {room}: {n:2d} ({100 * n / len(user_events):.0f}%)")
+
+# Test-run attempts = runs that produced a result + runs that never compiled.
+_ran = counts.get("test-executed", 0)
+_nocompile = counts.get("test-execution-failed", 0)
+_failed = sum(1 for evs in user_events.values() for e in evs
+              if e["eventType"] == "test-executed"
+              and json.loads(e["json"]).get("testStatus") == "FAILED")
+print(f"\nTest-run attempts: {_ran + _nocompile}"
+      f"  ({_nocompile} never compiled; of the {_ran} that ran, {_failed} failed)")
 
 print(f"\nN (pre+post+tele matched): {len(tele_matched)}")
 

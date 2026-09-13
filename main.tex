@@ -52,11 +52,11 @@ Software testing, Debugging, Serious games, Computer science education, Educatio
 \label{sec:intro}
 % ===========================================================================
 In software engineering, testing and debugging skills are crucial, but students often find them boring and tedious compared to coding~\cite{straubinger2023survey, garousi2020testing}. Traditional lecture-based teaching has a hard time keeping their attention and leaves a large gap between theoretical understanding and real-world application~\cite{mccauley2008debugging}. Game-based teaching can recast testing tasks as narrative-driven gameplay with immediate, tangible feedback~\cite{connolly2012systematic, blanco2023gamification}.
-\emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} is a browser-based serious game in which players repair sabotaged spaceship systems by writing JUnit tests and debugging mutated code across seven levels; an initial evaluation with 79~students showed over 80\% improvement in test coverage and debugging skills.
+\emph{Sojourner under Sabotage}~\cite{straubinger2025sojourner} is a browser-based serious game in which players repair sabotaged spaceship systems by writing JUnit tests and debugging mutated code across seven levels; an initial evaluation with 79~students reported over 80\% enjoyment and measurable improvements in test coverage and debugging skills.
 This paper extends that work with an independent evaluation in a different institutional context: a self-hosted instance for 22 master's students at a Portuguese university, combining pre/post knowledge assessments, self-confidence measures, perception questionnaires, open-ended feedback and fine-grained behavioral telemetry (3,161 events across 14 types). That lets us ask not only \emph{whether} scores and attitudes shift over the session, but also \emph{how} students engage with the tasks during gameplay.
 
 % \IEEEpubidadjcol  % re-enable only together with the \IEEEpubid block above
-Three questions guide the study. \textbf{RQ1}: to what extent do students' conceptual understanding and self-assessed confidence change over the session? \textbf{RQ2}: how do they perceive the game in terms of engagement, perceived learning, usability and cognitive load? \textbf{RQ3}: what behavioral patterns emerge from the telemetry, and how do they relate to learning outcomes? RQ1 and RQ2 are the primary evaluation; RQ3 adds a second, independent view of the same session, though triangulation does not by itself validate the self-reports.
+Three questions guide the study. \textbf{RQ1}: to what extent do students' conceptual understanding and self-assessed confidence change over the session? \textbf{RQ2}: how do they perceive the game in terms of engagement, perceived learning, usability and cognitive load? \textbf{RQ3}: what behavioral patterns emerge from the telemetry, and how do they relate to learning outcomes? RQ1 and RQ2 are the primary evaluation; RQ3 adds a second view of the same session.
 The contribution is an independent evaluation outside the group that built the game and---absent from earlier evaluations---a telemetry-based account of how students actually behaved during play.
 
 % ===========================================================================
@@ -84,29 +84,27 @@ Self-reported programming experience was predominantly intermediate (14/22), wit
 Only 8/22 had prior experience with testing tools.
 
 \textbf{Ethics and data governance.}
-Participation was voluntary and based on informed consent obtained at the start of the questionnaire; students could decline without any effect on their course standing.
-The activity was run as part of regular coursework and did not require review by an institutional ethics committee under our university's policy, which mandates formal review only for studies collecting sensitive personal data; no such data were collected.
+Participation was voluntary and based on informed consent obtained at the start of the questionnaire; students could decline without any effect on their course standing. The activity was run as part of regular coursework and no sensitive personal data were collected.
 Students chose a self-generated participant code, which was the only key linking questionnaire responses to game accounts; no names, student numbers, or IP addresses were recorded.
-The linked data were stored on the research group's internal server, accessible only to the authors, and the released replication package contains the de-identified derived data only.
+The linked data were stored on the research group's internal server, accessible only to the authors, and the released replication package contains pseudonymized data only.
 
 \subsection{The Game: Sojourner under Sabotage}
 
-Each of the seven levels runs as a cycle: a robot companion introduces a component; the player writes JUnit tests in an integrated editor; once the tests reach $\geq$50\% line coverage they are activated to monitor for sabotage; the system then injects a mutation; and if the player's tests catch it, debugging begins and the player locates and fixes the fault. If the mutation goes undetected the component is ``destroyed'' and the system supplies a hidden test as scaffolding.
+Each of the seven levels runs as a cycle: a robot companion introduces a component; the player writes JUnit tests until they reach $\geq$50\% line coverage, at which point the tests are activated to monitor for sabotage; the system injects a mutation; and if the tests catch it, the player locates and fixes the fault. If the mutation goes undetected the component is ``destroyed'' and a hidden test is supplied as scaffolding.
 Each student's game username matched their questionnaire participant code, which is what links telemetry, pre-test and post-test data per student.
 
 \subsection{Deployment and Monitoring Infrastructure}
 
-We deployed the instance on the university's internal server, reachable by all enrolled students over the institutional network, and generated anonymous accounts in bulk through the game's administrative interface.
-For post-session analysis we built a small web dashboard over the game's JSON telemetry export that renders per-student timelines, progression summaries and raw events, so instructors can inspect a student's testing and debugging actions without reading raw JSON; its source is in the replication package.
+We deployed the instance on the university's internal server, reachable over the institutional network, and generated anonymous accounts in bulk through the game's administrative interface. For post-session analysis we built a small web dashboard over the game's JSON telemetry export, so instructors can inspect a student's testing and debugging actions without reading raw JSON.
 
 \subsection{Session Structure}
 The session lasted approximately 2 hours, of which 50 minutes were an introductory lecture on software testing concepts, and the next approximately 60 minutes were devoted to guided gameplay, with 10 minutes allocated to completing pre- and post-activity questionnaires.
-The post-test therefore followed \emph{both} components. What we evaluate is the combined lecture-and-game session; the design cannot separate the contribution of the lecture from that of the game, and we interpret all results accordingly.
+The post-test therefore followed \emph{both} components: the design cannot separate the lecture's contribution from the game's, and we interpret all results accordingly.
 
 \subsection{Data Collection}
 
-The pre-activity questionnaire collected background information (field, experience levels, prior tool use), 11~multiple-choice question (MCQ) items covering testing vs.\ debugging, unit/integration/black-box/white-box/mutation/functional testing and test case analysis, and four self-confidence Likert items (5-point scale). The post-activity questionnaire repeated the 11~MCQ and 4~self-confidence items and added perceived learning (4~items), engagement (3), usability (3), cognitive load (3) and four open-ended questions.
-In parallel the backend logged 14~event types per player---room transitions and phase changes, edits to the test class and the class-under-test, test execution results with per-method pass/fail and line coverage, compilation errors, mutation detection outcomes, debugging actions, component fixes and destructions, and hidden test triggers---each timestamped and linked to the player's username.
+The pre-activity questionnaire collected background information, 11~multiple-choice question (MCQ) items spanning testing vs.\ debugging, the unit/integration/black-box/white-box/mutation/functional distinctions and test case analysis, and four self-confidence Likert items (5-point scale). The post-activity questionnaire repeated those and added perceived learning (4~items), engagement (3), usability (3), cognitive load (3) and four open-ended questions; the full instrument is in the replication package.
+In parallel the backend logged 14~event types per player, covering room and phase transitions, edits to the test class and the class-under-test, test results with per-method pass/fail and coverage, compilation errors, mutation outcomes, component fixes and destructions, and hidden test triggers.
 
 \subsection{Data Analysis}
 
@@ -115,7 +113,7 @@ MCQ scores were compared with a two-sided Wilcoxon signed-rank test. The seven z
 Normalized learning gain was computed as $g = (post - pre)/(11 - pre)$.
 Spearman correlations were estimated as Pearson correlations on mid-ranks (valid under ties) and tested with a permutation test over $10^5$ pairings; 95\% confidence intervals use the Fisher $z$ transform.
 Internal consistency was assessed using Cronbach's~$\alpha$ for every multi-item scale.
-Questionnaire constructs are reported as means with medians and interquartile ranges; ``\% agree'' denotes responses of 4 or 5 on the 5-point scale, and a construct's \% agree is the mean of its items' individual percentages.
+Questionnaire constructs are reported as means; ``\% agree'' denotes responses of 4 or 5 on the 5-point scale, and a construct's \% agree is the mean of its items' individual percentages.
 
 % ===========================================================================
 \section{Results}
@@ -128,11 +126,11 @@ Questionnaire constructs are reported as means with medians and interquartile ra
 
 Across the 21 matched pairs (22 pre, 21 post), the mean score rose from 8.29 (median 8, IQR 8--9) to 9.14 out of 11 (median 10, IQR 8--10; $\Delta = +0.86$, normalized gain 0.246), with 10 students improving, 7 unchanged and 4 declining.
 The Wilcoxon test was not significant ($T = 27$, $n = 14$, $Z = 1.627$, exact $p = 0.117$; $r = 0.355$, medium).
-The improvement is therefore a positive but statistically inconclusive trend, and the pre-test baseline leaves little room for movement.
+The improvement is therefore a positive but statistically inconclusive trend.
 Descriptively, the three students scoring below 8 at pre-test gained most (5.67~$\rightarrow$~9.00, normalized gain 0.50), the fifteen mid-baseline students gained moderately (8.40~$\rightarrow$~8.93, 0.244), and the three scoring $\geq 10$ did not change.
 These cut-offs were chosen after inspecting the distribution and the extreme groups contain only three students each, so the pattern is descriptive only: regression to the mean and the narrower headroom available to high scorers are equally plausible explanations, and we draw no inference about differential benefit.
 
-Per-item accuracy improved most on concepts directly practiced in the session: the testing vs.\ debugging distinction (+26\%), revealing test case identification (+22\%), and mutation testing (+12\%). Items already near ceiling at pre-test (Q3, Q4, Q10, Q11; $\geq 95\%$ correct) did not change.
+Per-item accuracy improved most on concepts directly practiced in the session: the testing vs.\ debugging distinction (+26\%), revealing test case identification (+22\%), and mutation testing (+12\%). Items already near ceiling at pre-test (Q3, Q4, Q10, Q11; $\geq 95\%$ correct) did not change; per-item pre-test accuracy ranged from 41\% to 100\%.
 
 \subsubsection{Self-Confidence}
 
@@ -142,22 +140,20 @@ Internal consistency was good (Cronbach $\alpha_{pre} = 0.814$, $\alpha_{post} =
 \subsection{RQ2: Student Perception}
 
 Students rated the session highly on all three reliable constructs: perceived learning 4.06 (86\% agree, $\alpha = 0.87$), engagement 4.05 (76\%, $\alpha = 0.75$) and usability 4.24 (75\%, $\alpha = 0.98$).
-At the level of individual items, 95\% agreed it helped them understand testing vs.\ debugging, 86\% agreed the activity was engaging, and 71\% preferred it over traditional lectures; these single-item figures are higher than the construct averages, which aggregate three or four items each.
+At the level of individual items, 95\% agreed it helped them understand testing vs.\ debugging, 86\% agreed the activity was engaging, and 71\% preferred it over traditional lectures.
 The three cognitive-load items did not form a reliable scale ($\alpha = -0.57$), so we report them individually rather than as a composite: mental effort 3.19, parts of the activity confusing 2.86, and difficulty level appropriate 3.86 (71\% agreement).
 
-The open-ended responses were grouped by recurring topic by one author. This was not a formal thematic analysis with independent coders and inter-rater agreement, so we report the groupings as descriptive impressions rather than validated themes, with counts out of the 21 respondents.
-Asked what helped them learn most, 8 students named the game or its interactivity (e.g.\ \emph{``The code changing in real time demanding debugging,''} \emph{``The gamification''}), and 3 explicitly credited the preceding lecture, the slides, or the instructor---a reminder that the two components cannot be separated here.
-Asked what was most difficult, 6 pointed to writing or designing the tests themselves, 5 to understanding the code and locating faults, and 4 to orienting themselves when the game began (\emph{``know where to start''}).
-Only 3 students raised the programming language as such (\emph{``Sintaxe do Java''}; one asked for Python instead), so the Java barrier was less prominent in these data than the difficulty of test design.
-Three students answered in Portuguese; their quotations are translated by the authors, with the original given where quoted.
+One author grouped the open-ended responses by recurring topic. This was not a formal thematic analysis with independent coders, so we report the groupings as descriptive impressions, with counts out of 21 respondents.
+Asked what helped them learn most, 8 named the game or its interactivity (\emph{``The code changing in real time demanding debugging''}) and 3 credited the preceding lecture, slides or instructor.
+Asked what was hardest, 6 pointed to writing or designing the tests, 5 to understanding the code and locating faults, and 4 to orienting themselves when the game began (\emph{``know where to start''}). Only 3 raised the programming language itself (\emph{``Sintaxe do Java''}; one asked for Python).
 
 \subsection{RQ3: Behavioral Engagement (Telemetry)}
 
 The game recorded 3,161~events across 14 event types from the 22~students who played (Table~\ref{tab:telemetry}); the 21 who also completed both questionnaires form the matched set used below, and a further unmatched account's 15~events are excluded throughout.
-For those 21, a median of 40~minutes separated their first and last logged event, or 32~minutes once gaps longer than five minutes are excluded as idle time.
+For those 21, a median of 40~minutes separated their first and last logged event, or 32~minutes with any gap longer than five minutes capped at five to discount idle time.
 
 \begin{table}[htbp]
-\caption{Telemetry event counts (22 students, 3,161 events)}
+\caption{Telemetry event counts (22 students, 3,161 logged records). Component fixed, mutation detected and destroyed are logged twice per occurrence: 53, 34 and 28 distinct.}
 \label{tab:telemetry}
 \centering
 \small
@@ -176,10 +172,10 @@ Component fixed    & 106   & Hidden test added   & 36 \\
 \end{tabular}
 \end{table}
 
-Progression fell off steadily: all 22 students started Room~1 (CryoSleep), 12 (55\%) reached Room~2, then 10, 9, 8 and 6 students reached Rooms~3--6 respectively, and 2 (9\%) completed all seven.
+Progression fell off steadily: all 22 students started Room~1 (CryoSleep), 16 (73\%) reached Room~2, then 11, 10, 8 and 6 students reached Rooms~3--6 respectively, and 2 (9\%) reached Room~7; no student completed it.
 
-Fifty-six \emph{ComponentDestroyedEvent}s indicate cases where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
-This shows the adaptive support mechanism was triggered in practice; the event counts alone say nothing about whether that support improved learning, and both counts are concentrated in a subset of students rather than spread evenly.
+Fifty-six \emph{ComponentDestroyedEvent}s---28 distinct cases, since the game logs each destruction twice---indicate where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
+The counts show the scaffolding was triggered in practice, say nothing about whether it improved learning, and are concentrated in a subset of students.
 An exploratory correlation analysis ($N = 21$ students with matched telemetry and questionnaire data) found a positive association between game progression and MCQ gains (Spearman $\rho = 0.53$, permutation $p = 0.015$, 95\%~CI $[0.12, 0.78]$; Fig.~\ref{fig:correlation}).
 Progression was also strongly correlated with test executions ($\rho = 0.91$, $p < 0.001$, CI $[0.79, 0.96]$), although advancement in this game structurally \emph{requires} executing tests, so this association is partly a property of the design rather than an independent finding.
 
@@ -197,25 +193,28 @@ Progression was also strongly correlated with test executions ($\rho = 0.91$, $p
 
 \subsection{Interpreting the Results}
 
-Our engagement (86\%) and perceived-learning (95\%) figures are consistent with the original evaluation's report of over 80\% enjoyment~\cite{straubinger2025sojourner}, which suggests the game is received similarly outside the group that built it.
+Our single-item engagement (86\%) and perceived-learning (95\%) figures are consistent with the original evaluation's report of over 80\% enjoyment~\cite{straubinger2025sojourner}, which suggests the game is received similarly outside the group that built it.
 The knowledge result is weaker and needs care. The non-significant improvement (exact $p = 0.117$) is not evidence of ineffectiveness, but neither is it evidence of learning: the pre-test mean of 8.3/11 left little room to move, and four of the eleven items were already answered correctly by at least 95\% of students beforehand.
-Students who progressed further did tend to improve more ($\rho = 0.53$, CI $[0.12, 0.78]$), but the interval is wide and prior knowledge, Java proficiency, motivation and working speed would all plausibly raise both progression and score change. With this sample we could not model those jointly, so progression is not independent evidence that the session produced learning. What the telemetry does establish is that advancement reflected real testing activity rather than passive navigation, and that the scaffolding was exercised.
+Students who progressed further did tend to improve more ($\rho = 0.53$, CI $[0.12, 0.78]$), but the interval is wide and prior knowledge, Java proficiency, motivation, working speed and time on task would all plausibly raise both progression and score change. With this sample we could not model those jointly, so progression is not independent evidence that the session produced learning.
 The open-ended answers point the same way: students valued the immediate feedback and several described watching a component break and repairing it as what made testing and debugging feel different, while three credited the lecture or the instructor rather than the game---consistent with our inability to separate the two.
+
+Two patterns in the telemetry carry a lesson for anyone running this game in class. The first is pacing. Only 2 of 22 students reached the seventh room and fewer than half got past the fourth, so an hour of play exercises the early components thoroughly and the later ones barely at all. The game's seven levels are not a syllabus that fits a single session, and treating the last of them as assessable would penalise students for the clock rather than for their testing.
+The second is how much of the difficulty sat in writing tests rather than in reading code. Of 332 test-run attempts, 113 never compiled---mostly Java syntax errors in the first room---while 65 of the 219 that did compile ended in a failing test. Syntax blocks the opening level, but six students named test design as the hardest part against three who named the language: a class needs a short Java refresher up front and, beyond it, worked examples of what a useful test looks like.
 
 \subsection{Practical Implications}
 
-For instructors considering the game: allow at least 70~minutes of play, since shorter sessions leave students in the tutorial level, and budget guidance for the first level, because orientation rather than syntax was what students most often found hard at the start.
+For an instructor this translates into four things: allow at least 70~minutes and plan for partial completion rather than assessing the later levels; budget guidance for the first level, where orientation and Java syntax were both obstacles; watch the failure rate live in the telemetry and step in when a student stalls on it; and say beforehand what a destroyed component means, so it is not read as personal failure.
 
 % ===========================================================================
 \section{Threats to Validity}
 \label{sec:threats}
 % ===========================================================================
 
-\textbf{Internal.} The single-group pre/post design without a control group rules out causal interpretation, and because the lecture and the gameplay were delivered in one session, no result here can be attributed to the game alone. Reusing identical MCQ items may add a testing effect, and the ceiling in the instrument limits the observable range.
+\textbf{Internal.} A single-group pre/post design without a control group rules out causal interpretation, and with the lecture and the gameplay in one session no result can be attributed to the game alone. Reusing identical MCQ items may add a testing effect, and the instrument's ceiling limits the observable range.
 
-\textbf{Construct.} The 11-item MCQ was written by the authors for this session and mapped to the concepts the game exercises, but it was neither externally validated nor piloted for difficulty; it is in the replication package so others can assess it. We report no internal-consistency coefficient for it, because its items deliberately span distinct concepts rather than one latent trait, and a coefficient like KR-20 would penalise that breadth rather than measure the instrument's adequacy. The cognitive-load items mix valence and did not form a reliable scale ($\alpha = -0.57$), so we report them individually. Usability's $\alpha = 0.98$ suggests its three items are close to redundant. Perceived learning is self-report, not demonstrated learning.
+\textbf{Construct.} The 11-item MCQ was written by the authors and neither externally validated nor piloted; it is in the replication package for others to assess. We report no internal-consistency coefficient for it: its items deliberately span distinct concepts rather than one latent trait, so a coefficient like KR-20 would penalise that breadth rather than measure adequacy. The cognitive-load items mix valence---one is positively worded---and were analysed in their original direction; they did not form a reliable scale, so we report them individually; usability's $\alpha = 0.98$ suggests its items are near-redundant. Perceived learning is self-report, not demonstrated learning.
 
-\textbf{External and reliability.} A single intact class at one institution fixed the sample rather than letting us choose it; with $N = 21$ matched pairs the study is underpowered for anything but a large effect, and every inferential result should be read as exploratory. Cronbach's $\alpha$ for self-confidence ($\geq 0.81$), perceived learning ($0.87$) and engagement ($0.75$) is acceptable to good.
+\textbf{External and reliability.} A single intact class at one institution fixed the sample rather than letting us size it, so a sampling formula such as Cochran's does not apply; with $N = 21$ matched pairs the study is underpowered for anything but a large effect, and every inferential result should be read as exploratory.
 
 % ===========================================================================
 \section{Conclusion}
