@@ -9,7 +9,7 @@ Authors: Aazaade Faraji, Enrico Nunes, Francisco Reis, Nuno Pombo,
 This script reproduces all statistical results reported in the paper using:
   - data_pre_questionnaire.csv   (pre-session questionnaire, N=22)
   - data_post_questionnaire.csv  (post-session questionnaire, N=21)
-  - data_telemetry.json          (in-game behavioral telemetry)
+  - telemetry.json               (in-game behavioral telemetry)
 
 All inferential statistics are computed with SciPy. Every test reports the
 test statistic, the handling of zero differences and ties, whether the p-value
