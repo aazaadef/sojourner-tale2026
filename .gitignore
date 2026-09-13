@@ -10,3 +10,6 @@ __pycache__/
 *.bbl
 *.blg
 *.synctex.gz
+
+# working draft, not part of the released package
+main-balanced.tex
