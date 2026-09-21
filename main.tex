@@ -23,7 +23,7 @@
 % conference class already omits them; this makes that explicit.
 \pagestyle{empty}
 
-\title{Teaching Software Testing and Debugging Through a Serious Game: An Empirical Classroom Study with Sojourner under Sabotage}
+\title{Teaching Software Testing and Debugging Through a Serious Game: An Empirical Classroom Study Using Sojourner under Sabotage}
 
 \author{
 \IEEEauthorblockN{Aazaade Faraji\IEEEauthorrefmark{1}, Enrico Nunes\IEEEauthorrefmark{1}, Francisco Reis\IEEEauthorrefmark{1}, Nuno Pombo\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}, Christina Andersson\IEEEauthorrefmark{3}}
@@ -90,7 +90,7 @@ The linked data were stored on the research group's internal server, accessible 
 
 \subsection{The Game: Sojourner under Sabotage}
 
-Each of the seven levels runs as a cycle: a robot companion introduces a component; the player writes JUnit tests until they reach $\geq$50\% line coverage, at which point the tests are activated to monitor for sabotage; the system injects a mutation; and if the tests catch it, the player locates and fixes the fault. If the mutation goes undetected the component is ``destroyed'' and a hidden test is supplied as scaffolding.
+Each of the seven levels runs as a cycle: a robot companion introduces a component; the player writes JUnit tests until they reach $\geq$50\% line coverage, at which point the tests are activated to monitor for sabotage; the system injects a mutation; and the player then locates and fixes the fault---either because the tests caught the mutation or, where they did not, once the component has been ``destroyed'' and a hidden test supplied as scaffolding. A repaired component can be sabotaged again without its tests being re-activated.
 Each student's game username matched their questionnaire participant code, which is what links telemetry, pre-test and post-test data per student.
 
 \subsection{Deployment and Monitoring Infrastructure}
@@ -110,7 +110,7 @@ In parallel the backend logged 14~event types per player, covering room and phas
 
 All analyses were computed with SciPy~1.13; the script is in the replication package.
 MCQ scores were compared with a two-sided Wilcoxon signed-rank test. The seven zero differences were discarded, leaving $n = 14$ non-zero pairs, and tied absolute differences were handled by mid-ranks. We report an exact $p$-value obtained by enumerating all $2^{14}$ sign assignments of the observed ranks; the tie-corrected normal approximation is given alongside it. The effect size is $r = |Z|/\sqrt{N}$ with $N = 21$ pairs.
-Normalized learning gain was computed as $g = (post - pre)/(11 - pre)$.
+Normalized learning gain was computed per student as $g = (post - pre)/(11 - pre)$ and averaged across students; the one student already at ceiling, for whom $g$ is undefined, contributes 0.
 Spearman correlations were estimated as Pearson correlations on mid-ranks (valid under ties) and tested with a permutation test over $10^5$ pairings; 95\% confidence intervals use the Fisher $z$ transform.
 Internal consistency was assessed using Cronbach's~$\alpha$ for every multi-item scale.
 Questionnaire constructs are reported as means; ``\% agree'' denotes responses of 4 or 5 on the 5-point scale, and a construct's \% agree is the mean of its items' individual percentages.
@@ -174,7 +174,7 @@ Component fixed    & 106   & Hidden test added   & 36 \\
 
 Progression fell off steadily: all 22 students started Room~1 (CryoSleep), 16 (73\%) reached Room~2, then 11, 10, 8 and 6 students reached Rooms~3--6 respectively, and 2 (9\%) reached Room~7; no student completed it.
 
-Fifty-six \emph{ComponentDestroyedEvent}s---28 distinct cases, since the game logs each destruction twice---indicate where students' tests failed to detect sabotage, triggering hidden tests as scaffolding (36~events).
+Fifty-six \emph{ComponentDestroyedEvent}s---28 distinct cases, since the game logs each destruction twice---indicate where students' tests failed to detect sabotage, each triggering a hidden test as scaffolding (36~records; eight are repeat injections for one student on one component).
 The counts show the scaffolding was triggered in practice, say nothing about whether it improved learning, and are concentrated in a subset of students.
 An exploratory correlation analysis ($N = 21$ students with matched telemetry and questionnaire data) found a positive association between game progression and MCQ gains (Spearman $\rho = 0.53$, permutation $p = 0.015$, 95\%~CI $[0.12, 0.78]$; Fig.~\ref{fig:correlation}).
 Progression was also strongly correlated with test executions ($\rho = 0.91$, $p < 0.001$, CI $[0.79, 0.96]$), although advancement in this game structurally \emph{requires} executing tests, so this association is partly a property of the design rather than an independent finding.
@@ -198,7 +198,7 @@ The knowledge result is weaker and needs care. The non-significant improvement (
 Students who progressed further did tend to improve more ($\rho = 0.53$, CI $[0.12, 0.78]$), but the interval is wide and prior knowledge, Java proficiency, motivation, working speed and time on task would all plausibly raise both progression and score change. With this sample we could not model those jointly, so progression is not independent evidence that the session produced learning.
 The open-ended answers point the same way: students valued the immediate feedback and several described watching a component break and repairing it as what made testing and debugging feel different, while three credited the lecture or the instructor rather than the game---consistent with our inability to separate the two.
 
-Two patterns in the telemetry carry a lesson for anyone running this game in class. The first is pacing. Only 2 of 22 students reached the seventh room and fewer than half got past the fourth, so an hour of play exercises the early components thoroughly and the later ones barely at all. The game's seven levels are not a syllabus that fits a single session, and treating the last of them as assessable would penalise students for the clock rather than for their testing.
+Two patterns in the telemetry carry a lesson for anyone running this game in class. The first is pacing. Only 2 of 22 students reached the seventh room and fewer than half got past the fourth, so the median 40~minutes of logged play exercise the early components thoroughly and the later ones barely at all. The game's seven levels are not a syllabus that fits a single session, and treating the last of them as assessable would penalise students for the clock rather than for their testing.
 The second is how much of the difficulty sat in writing tests rather than in reading code. Of 332 test-run attempts, 113 never compiled---mostly Java syntax errors in the first room---while 65 of the 219 that did compile ended in a failing test. Syntax blocks the opening level, but six students named test design as the hardest part against three who named the language: a class needs a short Java refresher up front and, beyond it, worked examples of what a useful test looks like.
 
 \subsection{Practical Implications}
