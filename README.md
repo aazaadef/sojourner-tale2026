@@ -1,6 +1,6 @@
-# Sojourner under Sabotage — Replication Package
+# *Sojourner under Sabotage* — Replication Package
 
-**Paper:** *Teaching Software Testing and Debugging Through a Serious Game: An Empirical Classroom Study with Sojourner under Sabotage*
+**Paper:** "Teaching Software Testing and Debugging Through a Serious Game: An Empirical Classroom Study Using *Sojourner under Sabotage*"
 
 Accepted as a short paper at **IEEE TALE 2026**, Pattaya, Thailand.
 
@@ -64,7 +64,7 @@ observed changes.
 
 ## Game
 
-[Sojourner under Sabotage](https://github.com/se2p/sojourner-under-sabotage) — browser-based serious game for teaching software testing and debugging, by Straubinger, Greller and Fraser.
+[*Sojourner under Sabotage*](https://github.com/se2p/sojourner-under-sabotage) — browser-based serious game for teaching software testing and debugging, by Straubinger, Greller and Fraser.
 
 ## Funding
 
