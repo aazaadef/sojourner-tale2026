@@ -95,11 +95,10 @@ Each student's game username matched their questionnaire participant code, which
 
 \subsection{Deployment and Monitoring Infrastructure}
 
-We deployed the instance on the university's internal server, reachable over the institutional network, and generated anonymous accounts in bulk through the game's administrative interface. For post-session analysis we built a small web dashboard over the game's JSON telemetry export, so instructors can inspect a student's testing and debugging actions without reading raw JSON.
+We deployed the instance on the university's internal server and generated accounts in bulk through the game's administrative interface. A small web dashboard over the telemetry export let instructors inspect a student's actions without reading raw JSON.
 
 \subsection{Session Structure}
-The session lasted approximately 2 hours, of which 50 minutes were an introductory lecture on software testing concepts, and the next approximately 60 minutes were devoted to guided gameplay, with 10 minutes allocated to completing pre- and post-activity questionnaires.
-The post-test therefore followed \emph{both} components: the design cannot separate the lecture's contribution from the game's, and we interpret all results accordingly.
+The 2-hour session comprised a 50-minute lecture on testing concepts, roughly 60~minutes of guided gameplay, and 10~minutes for the pre- and post-activity questionnaires. The post-test therefore followed \emph{both} components, so the design cannot separate the lecture's contribution from the game's; we interpret all results accordingly.
 
 \subsection{Data Collection}
 
@@ -203,18 +202,18 @@ The second is how much of the difficulty sat in writing tests rather than in rea
 
 \subsection{Practical Implications}
 
-For an instructor this translates into four things: allow at least 70~minutes and plan for partial completion rather than assessing the later levels; budget guidance for the first level, where orientation and Java syntax were both obstacles; watch the failure rate live in the telemetry and step in when a student stalls on it; and say beforehand what a destroyed component means, so it is not read as personal failure.
+For an instructor this translates into four things. First, allow at least 70~minutes of play and plan assessment around partial completion rather than the later levels, since progression fell off well before most students reached the harder rooms. Second, budget explicit guidance for the first level rather than assuming students can find their footing alone: a short Java-syntax refresher immediately before play, plus a worked example of what a passing test looks like, would target exactly where students stalled. Third, watch the telemetry live during the session and treat repeated sabotage-and-scaffold cycles on the same component---one student had a single component destroyed and rescaffolded nine times---as a signal to check in directly rather than waiting to be asked. Fourth, say beforehand what a destroyed component means: that it triggers a hidden test rather than penalising the student, so scaffolding reads as built-in support and not as a personal mark of failure.
 
 % ===========================================================================
 \section{Threats to Validity}
 \label{sec:threats}
 % ===========================================================================
 
-\textbf{Internal.} A single-group pre/post design without a control group rules out causal interpretation, and with the lecture and the gameplay in one session no result can be attributed to the game alone. Reusing identical MCQ items may add a testing effect, and the instrument's ceiling limits the observable range.
+\textbf{Internal.} The single-group pre/post design without a control group rules out causal interpretation, and the combined session cannot isolate the game's contribution from the lecture's. Reusing identical MCQ items risks a testing effect.
 
-\textbf{Construct.} The 11-item MCQ was written by the authors and neither externally validated nor piloted; it is in the replication package for others to assess. We report no internal-consistency coefficient for it: its items deliberately span distinct concepts rather than one latent trait, so a coefficient like KR-20 would penalise that breadth rather than measure adequacy. The cognitive-load items mix valence---one is positively worded---and were analysed in their original direction; they did not form a reliable scale, so we report them individually; usability's $\alpha = 0.98$ suggests its items are near-redundant. Perceived learning is self-report, not demonstrated learning.
+\textbf{Construct.} The author-written 11-item MCQ was neither validated nor piloted; we report no internal-consistency coefficient since its items span distinct concepts, which KR-20 would penalise rather than measure. The unreliable cognitive-load scale is reported per item; usability's near-ceiling $\alpha$ suggests redundancy. Perceived learning is self-report, not demonstrated learning.
 
-\textbf{External and reliability.} A single intact class at one institution fixed the sample rather than letting us size it, so a sampling formula such as Cochran's does not apply; with $N = 21$ matched pairs the study is underpowered for anything but a large effect, and every inferential result should be read as exploratory.
+\textbf{External and reliability.} The fixed, single-class sample makes Cochran's sizing inapplicable; with $N = 21$ matched pairs the study is underpowered for anything but a large effect, so results are exploratory.
 
 % ===========================================================================
 \section{Conclusion}
